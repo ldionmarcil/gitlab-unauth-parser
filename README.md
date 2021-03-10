@@ -29,6 +29,8 @@ The Gitlab user API starts at user ID `1` and is incremented by 1 for each user.
 #### Groups
 Groups can help understand the kind of data this Gitlab instance is responsible for hosting.
 
+For more information on the visibility of users, consult the Gitlab documentation: https://gitlab.com/gitlab-org/gitlab-foss/-/blob/master/doc/public_access/public_access.md#visibility-of-users
+
 ### Installation
 ```
 git clone https://github.com/ldionmarcil/gitlab-unauth-parser/
