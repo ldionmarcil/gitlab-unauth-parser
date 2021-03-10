@@ -131,7 +131,7 @@ class Gitlab:
     def get_users(self):
 
         logger = logging.getLogger('users')
-        id = 400
+        id = 1
         buffer = 20
         last_user_found = 1
 
