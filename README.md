@@ -28,3 +28,11 @@ Unbeknownst to many Gitlab administrators, "public" repositories do not mean "pu
 The Gitlab user API starts at user ID `1` and is incremented by 1 for each user. With this knowledge, this script starts at the begining and requests user IDs until 20 subsequent user IDs are not found, indicating that the last user has likely been found. Using this, we can extract the list of users of some Gitlab instances without authentication.
 #### Groups
 Groups can help understand the kind of data this Gitlab instance is responsible for hosting.
+
+### Installation
+```
+git clone https://github.com/ldionmarcil/gitlab-unauth-parser/
+cd gitlab-unauth-parser
+poetry install
+```
+Once done, you can run `$ poetry run python -m gitlab_unauth_parser -h`
