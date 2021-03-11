@@ -6,6 +6,9 @@ from sys import exit, stdout
 
 import git
 import requests
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 PROJECTS_API = '/api/v4/projects'
 USERS_API = '/api/v4/users'
@@ -74,7 +77,7 @@ class Gitlab:
     def get_projects(self, clone=False):
 
         logger = logging.getLogger('projects')
-        res = requests.get(f'{self.url}/{PROJECTS_API}')
+        res = requests.get(f'{self.url}/{PROJECTS_API}', verify=False)
         projects = res.json()
         repos = []
 
@@ -137,7 +140,7 @@ class Gitlab:
 
         logger.info('Enumerating users...')
         while True:
-            res = requests.get(f'{self.url}/{USERS_API}/{id}')
+            res = requests.get(f'{self.url}/{USERS_API}/{id}', verify=False)
 
             if res.status_code == 200:
                 last_user_found = id
@@ -160,7 +163,7 @@ class Gitlab:
     def get_groups(self):
 
         logger = logging.getLogger('groups')
-        res = requests.get(f'{self.url}/{GROUPS_API}')
+        res = requests.get(f'{self.url}/{GROUPS_API}', verify=False)
         groups = res.json()
 
         logger.info(f'Found {len(groups)} groups.')
@@ -177,7 +180,9 @@ class Gitlab:
             logger.info('')
 
     def _is_gitlab(self):
-        res = requests.get(f'{self.url}/robots.txt', allow_redirects=False)
+        res = requests.get(f'{self.url}/robots.txt',
+                           allow_redirects=False,
+                           verify=False)
         if res.status_code != 200 or 'https://gitlab.com' not in res.text:
             exit()
 
